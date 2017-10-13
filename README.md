@@ -22,8 +22,8 @@ $ open https://travis-ci.org
 ## Tutorial
 Переменные окружения
 ```ShellSession
-$ export GITHUB_USERNAME=<имя_пользователя>
-$ export GITHUB_TOKEN=<полученный_токен>
+$ export GITHUB_USERNAME=n0k8t
+$ export GITHUB_TOKEN=xxxxxxxxxxxxxxxxxxxxx
 ```
 Копирование репозитория лабораторной работы №4
 ```ShellSession
@@ -35,14 +35,14 @@ $ git remote add origin https://github.com/${GITHUB_USERNAME}/lab05
 Запись в файл для Travis CI
 ```ShellSession
 $ cat > .travis.yml <<EOF
-language: cpp
+language: cpp     # устанавливаем язык компиляции для travis
 EOF
 ```
 
 ```ShellSession
 $ cat >> .travis.yml <<EOF
 
-script:
+script:   # создаем скрипт для запуска далее сборок
 - cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
 - cmake --build _build
 - cmake --build _build --target install
@@ -54,9 +54,9 @@ $ cat >> .travis.yml <<EOF
 
 addons:
   apt:
-    sources:
+    sources:  # Adding PPA
       - george-edison55-precise-backports
-    packages:
+    packages: # Adding APT Packages
       - cmake
       - cmake-data
 EOF
@@ -71,7 +71,7 @@ $ travis lint
 ```
 Вставка в текст
 ```ShellSession
-$ ex -sc '1i|<фрагмент_вставки_значка>' -cx README.md
+$ ex -sc '1i|[![Build Status](https://travis-ci.org/n0k8t/lab05.svg?branch=master)](https://travis-ci.org/n0k8t/lab05)' -cx README.md
 ```
 Коммиты
 ```ShellSession
